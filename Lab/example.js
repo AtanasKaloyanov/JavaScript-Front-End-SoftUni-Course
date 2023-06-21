@@ -1,22 +1,4 @@
-let a = 22;
-let adulthood;
+let array = [1, 2, 3, 4];
 
-switch (a) {
-    case 14 :{
-        adulthood = 'No!'
-    }  break;
-
-    case 18 : {
-        adulthood = 'In America No!'
-    } break;
-
-    case 21 : {
-        adulthood = 'Yes!'
-    } break;
-
-    default : {
-        adulthood = 'There is not such number!'
-    }
-}
-
-console.log(adulthood);
+console.log(array.pop()); // 4
+console.log(array); // (4) [1, 2, 3]
