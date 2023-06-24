@@ -7,19 +7,17 @@ function sameNumber(number) {
 
     let flag = true;
     let firstElement = numberArray[0];
+    let sum = 0;
 
-    numberArray.forEach( (currentElement) => {
-          if (currentElement != firstElement) {
+    numberArray.forEach((currentElement) => {
+        if (currentElement != firstElement) {
             flag = false;
-            return
-          }
+        }
+
+        sum += currentElement
     })
 
-    let sum = numberArray.reduce( (a, b) => {
-        return a + b;
-    })
-
-console.log(flag);
-console.log(sum);
+    console.log(flag);
+    console.log(sum);
 }
 
