@@ -3,132 +3,92 @@ function crystalProcessing(crystals) {
 
     crystals.shift()
 
-    crystals.forEach( (currentCrystalThickness) => {
+    crystals.forEach((currentCrystalThickness) => {
         let cutCounter = 0
         let lapCounter = 0
         let grindCounter = 0
         let etchCounter = 0
 
+        // 1.  Starting processing of a new crystal
         console.log(`Processing chunk ${currentCrystalThickness} microns`)
 
-        // 1. cut
-        currentCrystalThickness = cut(currentCrystalThickness, cutCounter, desiredThickness)
+        // 2. Cut operation
+        while (currentCrystalThickness * 0.25 >= desiredThickness) {
+            currentCrystalThickness *= 0.25
+            cutCounter++
+        }
 
-        if (desireThicknessAchieved(currentCrystalThickness, desiredThickness)){
+        if (cutCounter > 0) {
+            console.log(`Cut x${cutCounter}`)
+
             currentCrystalThickness = transportingAndWashing(currentCrystalThickness)
+        }
 
-            finalPrinting(currentCrystalThickness)
+        if (desiredThicknessCheck(currentCrystalThickness, desiredThickness)) {
             return
-        } 
+        }
 
-        currentCrystalThickness = transportingAndWashing(currentCrystalThickness);
+        // 3. Lap operation
+        while (currentCrystalThickness * 0.80 >= desiredThickness) {
+            currentCrystalThickness *= 0.80
+            lapCounter++
+        }
 
-        // 2. lap 
-        currentCrystalThickness = lap(currentCrystalThickness, lapCounter, desiredThickness)
-
-        if (desireThicknessAchieved(currentCrystalThickness, desiredThickness)){
+        if (lapCounter > 0) {
+            console.log(`Lap x${lapCounter}`)
             currentCrystalThickness = transportingAndWashing(currentCrystalThickness)
+        }
 
-            finalPrinting(currentCrystalThickness)
+        if (desiredThicknessCheck(currentCrystalThickness, desiredThickness)) {
             return
-        } 
+        }
 
-        currentCrystalThickness = transportingAndWashing(currentCrystalThickness)
+        // 4. Grind operation
+        while (currentCrystalThickness - 20 >= desiredThickness) {
+            currentCrystalThickness -= 20
+            grindCounter++
+        }
 
-        // 3. grind
-        currentCrystalThickness = grind(currentCrystalThickness, grindCounter, desiredThickness)
-
-        if (desireThicknessAchieved(currentCrystalThickness, desiredThickness)){
+        if (grindCounter > 0) {
+            console.log(`Grind x${grindCounter}`)
             currentCrystalThickness = transportingAndWashing(currentCrystalThickness)
+        }
 
-            finalPrinting(currentCrystalThickness)
+        if (desiredThicknessCheck(currentCrystalThickness, desiredThickness)) {
             return
-        } 
+        }
 
-        currentCrystalThickness = transportingAndWashing(currentCrystalThickness);
+        // 5. Etch operation
+        while (currentCrystalThickness - 2 >= desiredThickness - 1) {
+            currentCrystalThickness -= 2
+            etchCounter++
+        }
 
-        // 4. etch 
-        currentCrystalThickness = etch(currentCrystalThickness, etchCounter, desiredThickness)
-
-        if (desireThicknessAchieved(currentCrystalThickness, desiredThickness)){
+        if (etchCounter > 0) {
+            console.log(`Etch x${etchCounter}`)
             currentCrystalThickness = transportingAndWashing(currentCrystalThickness)
+        }
 
-            finalPrinting(currentCrystalThickness)
-            return
-        } 
+        // 6. X-ray operation
+        if (currentCrystalThickness == desiredThickness - 1) {
+            currentCrystalThickness += 1
+            console.log('X-ray x1')
+        }
 
-        currentCrystalThickness = transportingAndWashing(currentCrystalThickness)
-
-        // 5. x-Ray
-        currentCrystalThickness = xRay(currentCrystalThickness)
-        finalPrinting(currentCrystalThickness)
+        console.log(`Finished crystal ${currentCrystalThickness} microns`)
     })
 
-    function cut(thickness, counter, desiredThickness) {
-        if (thickness * 0.25 < desiredThickness) {
-            console.log(`Cut x${counter}`)
-            return thickness
-        }
-
-        thickness = 0.25 * thickness
-        counter++
-    
-        return cut(thickness, counter, desiredThickness)
-    }
-    
-    function lap(thickness, counter, desiredThickness) {
-        if (thickness * 0.80 < desiredThickness) {
-            console.log(`Lap x${counter}`)
-            return thickness
-        }
-
-        thickness = 0.80 * thickness
-        counter++
-    
-        return lap(thickness, counter, desiredThickness)
-    }
-    
-    function grind(thickness, counter, desiredThickness) {
-        if (thickness - 20 < desiredThickness) {
-            console.log(`Grind x${counter}`)
-            return thickness
-        }
-
-        thickness = thickness - 20
-        counter++
-    
-        return grind(thickness, counter, desiredThickness)
-    }
-                                                                           
-    function etch(thickness, counter, desiredThickness) {    
-        if (thickness - 2 < desiredThickness - 1) {
-            console.log(`Etch x${counter}`)
-            
-            return thickness
-        }
-
-        thickness = thickness - 2
-        counter++
-    
-        return etch(thickness, counter, desiredThickness)
-    }
-    
-    function xRay(thickness) {
-        console.log('X-ray x1')
-        return  thickness + 1
-    }
-    
-    function transportingAndWashing(thickness) {
+    function transportingAndWashing(currentCrystalThickness) {
         console.log('Transporting and washing')
-        return thickness = Math.floor(thickness)
+
+        return Math.floor(currentCrystalThickness)
     }
-    
-    function desireThicknessAchieved(thickness, desiredThickness) {
-        return thickness == desiredThickness
-    }
-      
-    function finalPrinting(thickness) {
-        console.log(`Finished crystal ${thickness} microns`)
+
+    function desiredThicknessCheck(currentCrystalThickness, desiredThickness) {
+        if (currentCrystalThickness == desiredThickness) {
+            console.log(`Finished crystal ${currentCrystalThickness} microns`)
+            return true
+        }
     }
 }
 
