@@ -17,20 +17,13 @@ function parking(array) {
     if (cars.length == 0) {
         console.log('Parking Lot is Empty')
         return
-    } else {
-        cars.sort((a, b) => {
-            if (a > b) {
-                return 1
-            } else if (a < b) {
-                return -1
-            } else 0
-        })
-
-        cars.forEach( (currentCar) => console.log(currentCar))
     }
+    
+    cars.sort()
+    cars.forEach((currentCar) => console.log(currentCar))
 }
 
-// the input is an array. Every element of this array consist of command (IN or OUT) and a number of a car). When the command is IN - adding, OUT - removing 
+// the input is an array. Every element of this array consist of command (IN or OUT) and a number of a car). When the command is IN - adding, OUT - removing
 
 // parking(['IN, CA2844AA',
 //     'IN, CA1234TA',
