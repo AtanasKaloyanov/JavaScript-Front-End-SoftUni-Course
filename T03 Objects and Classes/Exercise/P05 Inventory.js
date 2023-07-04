@@ -24,13 +24,7 @@ function heroRegister(array) {
          let firstHeroLevel = firstHero.level
          let secondHeroLevel = secondHero.level
 
-         if (firstHeroLevel > secondHeroLevel) {
-            return 1
-         } else if (firstHeroLevel < secondHeroLevel) {
-            return -1
-         } else {
-            return 0
-         }
+         return firstHeroLevel - secondHeroLevel
      })
 
      heroes.forEach( (currentHero) => {
