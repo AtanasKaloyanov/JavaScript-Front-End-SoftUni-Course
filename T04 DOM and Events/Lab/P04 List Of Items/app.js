@@ -4,7 +4,11 @@ function addItem() {
 
     newElement.textContent = thirdInputValue
     document.getElementById('items').appendChild(newElement)
+
+    document.getElementById('newItemText').value = ''
 }
+
+
 
 /*
  <main>
