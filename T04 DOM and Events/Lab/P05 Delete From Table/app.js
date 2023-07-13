@@ -13,19 +13,25 @@ function deleteByEmail() {
         document.getElementById('result').textContent = 'Not found.'
     } else {
         let parent = document.getElementsByTagName('tbody')[0]
-        let children = parent.children
+
+        // first solution for deleting the searched row
+        // let children = parent.children
         
-        for (let currentChild of children) {
-           let grandChildren = currentChild.children
+        // for (let currentChild of children) {
+        //    let grandChildren = currentChild.children
 
-            for (let currentGrandChild of grandChildren) {
-                if (currentGrandChild.textContent == inputValue) {
-                   parent.removeChild(currentChild)
+        //     for (let currentGrandChild of grandChildren) {
+        //         if (currentGrandChild.textContent == inputValue) {
+        //            parent.removeChild(currentChild)
+        //         }
+        //     }
+        // }
 
-                }
-            }
-
-           
+        let columns = document.getElementsByTagName('td')
+        for (let currentColumn of columns) {
+             if (currentColumn.textContent == inputValue) {
+                parent.removeChild(currentColumn.parentNode)
+             }
         }
 
         document.getElementById('result').textContent = 'deleted'
