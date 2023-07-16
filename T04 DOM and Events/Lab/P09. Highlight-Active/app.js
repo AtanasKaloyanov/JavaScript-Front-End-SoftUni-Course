@@ -1,25 +1,23 @@
 function focused() {
-    let mainDiv = document.getElementsByTagName("div")[0];
+    let inputs = document.getElementsByTagName('input')
 
-    Array.from(mainDiv.getElementsByTagName("input")).forEach(element => {
-        element.addEventListener("focus", focus);
-    });
+    Array.from(inputs)
+    .forEach( (currentInput) => {
+        currentInput.addEventListener('focus', focus)
+        currentInput.addEventListener('blur', blur)
+    })
 
-    Array.from(mainDiv.getElementsByTagName("input")).forEach(element => {
-        element.addEventListener("blur", focusLost);
-    });
+        function focus(e) {
+            let input = e.currentTarget
+            let div = input.parentElement
+            div.className = 'focused'
+        }
 
-
-    function focus(e) {
-        let parent = e.target.parentNode;
-        parent.classList.add("focused");
-    }
-
-
-    function focusLost(e) {
-        let parent = e.target.parentNode;
-        parent.classList.remove("focused");
-    }
+        function blur(e) {
+            let input = e.currentTarget
+            let div = input.parentElement
+            div.className = ''
+        }
 
 }
 
@@ -47,3 +45,26 @@ function focused() {
     <script src="./app.js"></script>
 
     */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
