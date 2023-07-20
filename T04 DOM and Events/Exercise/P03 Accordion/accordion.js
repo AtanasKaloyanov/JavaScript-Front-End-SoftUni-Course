@@ -1,13 +1,16 @@
 function toggle() {
     const button = document.getElementsByClassName('button')[0]
-    const loremContainer = document.getElementById('accordion').children[1]
+    const loremContainer = document.getElementById('extra')
+    console.log(loremContainer)
 
-    if (button.innerHTML = 'More') {
-        button.innerHTML = 'Less'
-        loremContainer.id = 'notExtra'
-    } else if (button.innerHTML = 'Less') {
-        button.innerHTML = 'More'
-        loremContainer.id = 'extra'
+    if (button.textContent == 'More') {
+        button.textContent = 'Less'
+        // loremContainer.id = 'notExtra'
+        loremContainer.style.display = 'block'
+    } else if (button.textContent == 'Less') {
+        button.textContent = 'More'
+        // loremContainer.id = 'extra'
+        loremContainer.style.display = 'none'
     }
     
  }
@@ -16,7 +19,8 @@ function toggle() {
 // By second clicking the button should change to MORE and the content should be hidden
 
 
-/* <body>
+/*
+ <body>
     <div id="accordion">
         <div class="head">DOM Manipulations Exercise
             <span class="button" onclick="toggle()">More</span>
@@ -27,5 +31,6 @@ function toggle() {
         </div>
     </div>
     <script src="accordion.js"></script>
-</body> */
+</body> 
+*/
 
