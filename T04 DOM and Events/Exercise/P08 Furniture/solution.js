@@ -1,47 +1,62 @@
 function solve() {
-  // 1. Getting the button with textConten Generaye and adding and event to it
-  let divContainer = document.getElementById('exercise')
-  let button = divContainer.children[2]
-  button.addEventListener('click', onClick)
+    // 1. Getting the button with textConten Generaye and adding and event to it
+    let divContainer = document.getElementById('exercise')
+    let button = divContainer.children[2]
+    button.addEventListener('click', onClick)
 
-  // 2. function onClick description
-  function onClick(e) {
-    let generateTextArea = divContainer.children[1]
-    let array = JSON.parse(generateTextArea.value)
+    // 2. function onClick description
+    function onClick(e) {
+        let generateTextArea = divContainer.children[1]
+        let array = JSON.parse(generateTextArea.value)
 
-    array.forEach((currentObject) => {
-      let row = document.createElement('tr')
+        array.forEach((currentObject) => {
+            let row = document.createElement('tr')
 
-      for (i = 0; i < 4; i++) {
-        let column = document.createElement('td')
-        let entries = Object.entries(currentObject)
+            for (i = 0; i < 4; i++) {
+                let column = document.createElement('td')
+                let entries = Object.entries(currentObject)
 
-        if (i == 0) {
-          let imgElement = document.createElement('img')
-          imgElement.src = entries[0][1]
-          column.appendChild(imgElement)
-        }  else {
-          let p = document.createElement('p')
-          p.textContent = entries[i][1]
-          column.appendChild(p)
-        }
+                if (i == 0) {
+                    let imgElement = document.createElement('img')
+                    imgElement.src = entries[0][1]
+                    column.appendChild(imgElement)
+                } else {
+                    let p = document.createElement('p')
+                    p.textContent = entries[i][1]
+                    column.appendChild(p)
+                }
 
-        row.appendChild(column)
-      }
+                row.appendChild(column)
+            }
 
-      let lastColumn = document.createElement('td')
-      let input = document.createElement('input')
-      input.type = 'checkbox'
-      lastColumn.appendChild(input)
-      
-      row.appendChild(lastColumn)
+            let lastColumn = document.createElement('td')
+            let input = document.createElement('input')
+            input.type = 'checkbox'
+            
+            lastColumn.appendChild(input)
 
-      let tBody = document.getElementsByTagName('tbody')[0]
-      tBody.appendChild(row)
-      generateTextArea.value = ''
-    })
+            row.appendChild(lastColumn)
 
-  }
+            let tBody = document.getElementsByTagName('tbody')[0]
+            tBody.appendChild(row)
+            generateTextArea.value = ''
+
+        })
+
+    }
+
+    let byeButton = document.getElementsByTagName('button')[1]
+    byeButton.addEventListener('click', byeItem)
+
+    function byeItem() {
+        let outputField = document.getElementsByTagName('textarea')[1]
+
+        let inputs = document.querySelectorAll('td input')
+        console.log(inputs)
+    }
+
+
+
 }
 
 // input - an array of object in JSON. Every object has 1.image, 2.name, 3.price and 4.decoration factor
