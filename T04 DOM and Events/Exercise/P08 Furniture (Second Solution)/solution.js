@@ -9,7 +9,7 @@ function solve() {
         let generateTextArea = divContainer.children[1]
         let array = JSON.parse(generateTextArea.value)
 
-        array.forEach((currentObject) => {
+        array.forEach( (currentObject) => {
             let row = document.createElement('tr')
 
             for (i = 0; i < 4; i++) {
@@ -19,6 +19,7 @@ function solve() {
                 if (i == 0) {
                     let imgElement = document.createElement('img')
                     imgElement.src = entries[0][1]
+                    console.log(imgElement)
                     column.appendChild(imgElement)
                 } else {
                     let p = document.createElement('p')
@@ -32,7 +33,7 @@ function solve() {
             let lastColumn = document.createElement('td')
             let input = document.createElement('input')
             input.type = 'checkbox'
-            
+
             lastColumn.appendChild(input)
 
             row.appendChild(lastColumn)
@@ -40,7 +41,6 @@ function solve() {
             let tBody = document.getElementsByTagName('tbody')[0]
             tBody.appendChild(row)
             generateTextArea.value = ''
-
         })
 
     }
@@ -51,12 +51,28 @@ function solve() {
     function byeItem() {
         let outputField = document.getElementsByTagName('textarea')[1]
 
-        let inputs = document.querySelectorAll('td input')
-        console.log(inputs)
+        let rows = document.querySelectorAll('tbody tr')
+        let prices = []
+        let names = []
+
+        Array.from(rows)
+            .forEach( (currentRow) => {
+                let currentInput = currentRow.children[4].children[0]
+                if (currentInput.checked) {
+                    let nameParagraph = currentRow.children[1].children[0]
+                    names.push(nameParagraph.textContent)
+
+                    let searchedParagraph = currentRow.children[2].children[0]
+                    let price = Number(searchedParagraph.textContent)
+                    prices.push(price)
+                }
+            })
+
+        let totalPrice = prices.reduce((a, b) => a + b)
+
+        outputField.value = `Bought furniture: ${names.join(', ')}` + '\n' 
+        + `Total price: ${totalPrice}`
     }
-
-
-
 }
 
 // input - an array of object in JSON. Every object has 1.image, 2.name, 3.price and 4.decoration factor
