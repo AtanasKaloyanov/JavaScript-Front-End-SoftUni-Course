@@ -18,3 +18,4 @@ function ageDetermination(age) {
     console.log(output);
 }
 
+ageDetermination(22)
