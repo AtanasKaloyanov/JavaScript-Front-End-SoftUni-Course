@@ -15,14 +15,14 @@ function solve() {
   clearButton.addEventListener('click', clear)
 
   function clear() {
-    
+    location.reload()
  }
 
   function add(event) {
 
     event.preventDefault()
 
-    if (playerInput.value = '' ||
+    if (playerInput.value == '' ||
       scoreInput.value == '' ||
       roundInput.value == '') {
       return
@@ -36,10 +36,8 @@ function solve() {
 
     //1.1
     let p1 = document.createElement('p')
-    p1.textContent = playerInput.value.toStrng()
-    console.log(p1.textContent)
-    console.log(playerInput.value)
-
+    p1.textContent = playerInput.value
+   
     //1.2
     let p2 = document.createElement('p')
     p2.textContent = 'Score: ' + scoreInput.value
