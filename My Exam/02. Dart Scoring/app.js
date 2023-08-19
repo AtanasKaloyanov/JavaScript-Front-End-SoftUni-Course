@@ -16,7 +16,7 @@ function solve() {
 
   function clear() {
     location.reload()
- }
+  }
 
   function add(event) {
 
@@ -37,7 +37,7 @@ function solve() {
     //1.1
     let p1 = document.createElement('p')
     p1.textContent = playerInput.value
-   
+
     //1.2
     let p2 = document.createElement('p')
     p2.textContent = 'Score: ' + scoreInput.value
@@ -79,6 +79,10 @@ function solve() {
     function edit() {
       container.removeChild(li)
       addButton.disabled = false
+
+      playerInput.value = p1.textContent
+      scoreInput.value = p2.textContent.split(': ')[1]
+      roundInput.value = p3.textContent.split(': ')[1]
     }
 
     function ok() {
@@ -96,6 +100,5 @@ function solve() {
     }
 
   }
-
 
 }
