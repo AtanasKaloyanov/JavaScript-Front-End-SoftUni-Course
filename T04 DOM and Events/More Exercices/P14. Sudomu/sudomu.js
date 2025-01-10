@@ -15,10 +15,11 @@ function solve() {
     let r3c2 = r3[1].children[0];
     let r3c3 = r3[2].children[0];
 
-    let buttons = document.getElementsByClassName('buttons')[0].children;
 
-    let quickCheckButton = buttons[0];
+    let quickCheckButton = document.querySelector(".buttons input[type='submit']");
     let outputElement = document.getElementById('check');
+    let table = document.getElementsByTagName('table')[0];
+
     quickCheckButton.addEventListener('click', quickCheck);
     function quickCheck() {
         let r1c1V = r1c1.value;
@@ -32,20 +33,18 @@ function solve() {
         let r3c3V = r3c3.value;
 
         if (r1c1V == '' || r1c2V == '' || r1c3V == '' || r2c1V == '' || r2c2V == '' || r2c3V == '' || r3c1V == '' || r3c2V == '' || r3c3V == '') {
-            outputElement.textContent = 'Keep trying...';
+            outputElement.textContent = 'Keep trying ...';
             return;
         }
 
-        let row1Sum = r1c1V + r1c2V + r1c3V;
-        let row2Sum = r2c1V + r2c2V + r2c3V;
-        let row3Sum = r3c1V + r3c2V + r3c3V;
-        let column1Sum = r1c1V + r2c1V + r3c1V;
-        let column2Sum = r1c2V + r2c2V + r3c2V;
-        let column3Sum = r1c3V + r2c3V + r3c3V;
-        let diagonal1Sum = r1c1V + r2c2V + r3c3V;
-        let diagonal2Sum = r1c3V + r2c2V + r3c1V;
+        let row1Sum = Number(r1c1V) + Number(r1c2V) + Number(r1c3V);
+        let row2Sum = Number(r2c1V) + Number(r2c2V) + Number(r2c3V);
+        let row3Sum = Number(r3c1V) + Number(r3c2V) + Number(r3c3V);
+        let column1Sum = Number(r1c1V) + Number(r2c1V) + Number(r3c1V);
+        let column2Sum = Number(r1c2V) + Number(r2c2V) + Number(r3c2V);
+        let column3Sum = Number(r1c3V) + Number(r2c3V) + Number(r3c3V);
 
-        let sums = [row1Sum, row2Sum, row3Sum, column1Sum, column2Sum, column3Sum, diagonal1Sum, diagonal2Sum];
+        let sums = [row1Sum, row2Sum, row3Sum, column1Sum, column2Sum, column3Sum];
         let flag = false;
         for (let i = 0; i < sums.length - 1; i++) {
             let currentCompareSum = sums[i];
@@ -62,14 +61,16 @@ function solve() {
         }
 
         if (flag) {
-
+            table.style = 'border: 2px solid red';
+            outputElement.textContent = 'Keep trying ...';
         } else {
+            table.style = 'border: 2px solid green';
             outputElement.textContent = 'Success!'
         }
 
     }
 
-    let clearButton = buttons[1];
+    let clearButton = document.querySelector(".buttons input[type='reset']");
     clearButton.addEventListener('click', clear);
     function clear() {
         r1c1.value = '';
