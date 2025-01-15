@@ -10,10 +10,15 @@ function loadRepos() {
 	const BASE_URL = `https://api.github.com/users/${username}/repos`;
 
 	// 2. Then getting the repos via fetch API and adding every repo . The username 
-    
+
 	fetch(BASE_URL)
-		.then( (repos) => repos.json())
-		.then( (repos) => {
+		.then( (response) => {
+			if (!response.ok) {
+				throw new Error();
+			}
+			return response.json()
+		})
+		.then((repos) => {
 			for (let i = 0; i < repos.length; i++) {
 				let currentRepo = repos[i];
 				let newLi = document.createElement('li');
@@ -25,9 +30,13 @@ function loadRepos() {
 				newLi.append(newA);
 				conatainer.append(newLi);
 			}
-		});
+		})
+		.catch( () => {
+			conatainer.textContent = 'There are no repos with this username.'
+		})
+};
 
-}
+
 
 /*
 
