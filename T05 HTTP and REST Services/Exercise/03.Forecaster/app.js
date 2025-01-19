@@ -1,5 +1,4 @@
 function attachEvents() {
-    // 1. Adding the button an event:
     let input = document.getElementById('location');
     let button = document.getElementById('submit');
     button.addEventListener('click', weatherReport);
@@ -10,7 +9,8 @@ function attachEvents() {
     let upcomingContainer = document.getElementById('upcoming');
 
     function weatherReport() {
-        removeOldForecasts();
+        removeOldForecasts(currentContainer);
+        removeOldForecasts(upcomingContainer);
 
         let locatonId = input.value;
         const LOCATIONS_URL = 'http://localhost:3030/jsonstore/forecaster/locations';
@@ -64,15 +64,6 @@ function attachEvents() {
                         }
 
                         upcomingContainer.appendChild(div);
-
-                        /*
-                        <div class = 'forecast-info'>
-                          <span class = 'upcoming'>
-                             <span class = 'symbol'>
-                             <span class = 'forecast-data'>
-                             <span class = 'forecast-data' 
-
-                         */
                     };
                 }
 
@@ -132,20 +123,17 @@ function attachEvents() {
 
             });
 
-        function removeOldForecasts() {
-            let children = currentContainer.children;
+        function removeOldForecasts(conatiner) {
+            let children = conatiner.children;
             if (children.length == 2) {
-                currentContainer.removeChild(children[1]);
+                container.removeChild(children[1]);
             }
         }
     }
 
-    // 2. Getting the today and the upcoming forecasts using the code:
 }
 
 attachEvents();
-
-
 
 /*
 
@@ -155,11 +143,12 @@ attachEvents();
           <span class = 'forecast-data'> 
           <span class = 'forecast-data'>
           <span class = 'forecast-data'>
-*/
 
-
-/*
-
+          <div class = 'forecast-info'>
+                          <span class = 'upcoming'>
+                             <span class = 'symbol'>
+                             <span class = 'forecast-data'>
+                             <span class = 'forecast-data' 
 <body>
     <div id="content">
         <div id="request">
