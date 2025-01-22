@@ -4,12 +4,13 @@ function attachEvents() {
     const POSTS_URL = 'http://localhost:3030/jsonstore/blog/posts';
 
     let select = document.getElementById('posts');
-   
+
     let postS = null;
     function loadPosts() {
         fetch(POSTS_URL)
             .then((response) => response.json())
             .then((posts) => {
+                console.log(posts)
                 showPosts(posts);
                 postS = posts;
             });
@@ -20,28 +21,35 @@ function attachEvents() {
     const COMMENTS_URL = 'http://localhost:3030/jsonstore/blog/comments';
 
     function viewPosts() {
-        console.log(postS);
         fetch(COMMENTS_URL)
             .then((response) => response.json())
-            .then((comments) =>
+            .then((comments) => {
+                console.log(comments);
                 Object.entries(comments)
-                    .forEach( ([key, value]) => {
-                        console.log(key);
-                        console.log(value);
+                    .forEach(([key, value]) => {
+                    
                         let id = value.id;
                         let postId = value.postId;
                         let text = value.text;
-                        
-                        /*
+
+                    })
+            });
+    }
+
+    /*
+   Asynchronous Programming post:
+
 -MSbzSdzWBvBHJN7gdRw
  
 body:  "Nesciunt facere, omnis exercitationem neque quisquam optio quidem distinctio laboriosam libero consequuntur aperiam, id possimus accusamus ad eaque quis quas molestiae. Esse praesentium cumque quae nobis atque eligendi commodi nam dolores, aperiam vero quia quaerat, soluta, maiores molestiae voluptatum. Modi doloribus consequatur explicabo enim, voluptate nostrum amet expedita natus tempore exercitationem nesciunt quasi quidem eaque."
 id:  "-MSbzSdzWBvBHJN7gdRw"
 title:  "Asynchronous Programming"
 
-                        */
-                    }));
-    }
+    Asynchronous Programming comments:
+
+
+
+    */
 
     function showPosts(posts) {
         Object.entries(posts)
