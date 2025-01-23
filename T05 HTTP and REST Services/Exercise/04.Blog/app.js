@@ -5,16 +5,15 @@ function attachEvents() {
 
     let select = document.getElementById('posts');
 
-    let postS = null;
+    let idByTitle = {};
     function loadPosts() {
         fetch(POSTS_URL)
             .then((response) => response.json())
             .then((posts) => {
-                console.log(posts)
                 showPosts(posts);
-                postS = posts;
             });
     }
+    
 
     let viewButton = document.getElementById('btnViewPost');
     viewButton.addEventListener('click', viewPosts);
@@ -27,7 +26,7 @@ function attachEvents() {
                 console.log(comments);
                 Object.entries(comments)
                     .forEach(([key, value]) => {
-                    
+                      
                         let id = value.id;
                         let postId = value.postId;
                         let text = value.text;
@@ -55,6 +54,7 @@ title:  "Asynchronous Programming"
         Object.entries(posts)
             .forEach(([key, value]) => {
                 let title = value.title;
+                idByTitle[key] = title;
                 let option = document.createElement('option');
                 option.value = key;
                 option.textContent = title.toUpperCase();
