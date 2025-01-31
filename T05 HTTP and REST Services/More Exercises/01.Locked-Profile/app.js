@@ -59,7 +59,7 @@ function lockedProfile() {
                 input3.value = username;
                 input3.disabled = true;
                 input3.readOnly = true;
-
+    
                 // 3.1.10 Creating the new container and the other elements:
                 let newInfoCont = document.createElement('div');
                 newInfoCont.id = `user${i + 1}HiddenFields`;
@@ -85,19 +85,16 @@ function lockedProfile() {
                 input2In.value = age;
                 input2In.disabled = true;
                 input2In.readOnly = true;
-
                 // 3.1.11. Adding the elements to the container and the container to its container:
                 newInfoCont.appendChild(hrIn);
                 newInfoCont.appendChild(label1In);
                 newInfoCont.appendChild(input1In);
                 newInfoCont.appendChild(label2In);
                 newInfoCont.appendChild(input2In);
-
                 //     3.1.12. show button:
                 let button = document.createElement('button');
                 button.textContent = 'Show more';
                 button.addEventListener('click', (event) => showMoreInfo(event, newInfoCont));
-                
                 //      4. Adding the elements to the person main and the person main to its main:
                 personCont.appendChild(img);
                 personCont.appendChild(label1);
@@ -112,47 +109,43 @@ function lockedProfile() {
 
                 main.appendChild(personCont);
             }
-
-            // 5. Describing the showMoreInfo:
-            function showMoreInfo(event, newInfoCont) {
-                console.log(newInfoCont);
-                // 5.1. Getting the lockedInput and if it is checked  
-                let button = event.currentTarget;
-                let container = button.parentElement;
-                let elements = container.children;
-                let lockedInput = elements[2];
-
-                if (lockedInput.checked) {
-                    return
-                }
-
-                container.insertBefore(newInfoCont, button);
-
-                // 5.4. Removing the function on the button, 
-                button.textContent = 'Hide it';
-                button.removeEventListener('click', (event) => showMoreInfo(event, newInfoCont));
-                button.addEventListener('click', (event) => remInfo(event, newInfoCont))
-            }
-
-            function remInfo(event, newInfoCont) {
-                console.log(newInfoCont);
-                let button = event.currentTarget;
-                let container = button.parentElement;
-                let elements = container.children;
-                let lockedInput = elements[2];
-
-                if (lockedInput.checked) {
-                    return
-                }
-
-                button.textContent = 'Show it';
-                container.remove(newInfoCont);
-                button.removeEventListener('click', (event) => remInfo(event, newInfoCont));
-                button.addEventListener('click', (event) => showMoreInfo(event, newInfoCont))
-                
-            }
-
         })
+
+         // 5. Describing the showMoreInfo:
+         function showMoreInfo(event, newInfoCont) {
+            let button = event.currentTarget;
+            let container = button.parentElement;
+            let elements = container.children;
+            let lockedInput = elements[2];
+
+            if (lockedInput.checked) {
+                return
+            }
+
+            container.insertBefore(newInfoCont, button);
+
+            button.textContent = 'Hide it';
+            button.removeEventListener('click', (event) => showMoreInfo(event, newInfoCont));
+            button.addEventListener('click', (event) => remInfo(event, newInfoCont))
+        }
+
+        // 6. Describing the remInfo:
+        function remInfo(event, newInfoCont) {
+            let button = event.currentTarget;
+            let container = button.parentElement;
+            let elements = container.children;
+            let lockedInput = elements[2];
+
+            if (lockedInput.checked) {
+                return
+            }
+
+            button.textContent = 'Show it';
+            newInfoCont.remove();
+            button.removeEventListener('click', (event) => remInfo(event, newInfoCont));
+            button.addEventListener('click', (event) => showMoreInfo(event, newInfoCont));
+        }
+        
 }
 
 /*
